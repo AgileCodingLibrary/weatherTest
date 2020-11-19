@@ -24,20 +24,18 @@ weatherForm.addEventListener("submit", (e) => {
   message01.textContent = "Loading...";
   message02.textContent = "";
 
-  fetch("http://localhost:3000/weather?address=" + weatherLocation.value).then(
-    (response) => {
-      response.json().then((data) => {
-        if (data.error) {
-          message01.textContent = data.error;
-        } else {
-          message01.textContent = data.location;
-          message02.textContent = data.forecast;
+  fetch("/weather?address=" + weatherLocation.value).then((response) => {
+    response.json().then((data) => {
+      if (data.error) {
+        message01.textContent = data.error;
+      } else {
+        message01.textContent = data.location;
+        message02.textContent = data.forecast;
 
-          // "forecast": "Today at Silva Paes, we have a temperature of 57, Partly cloudy, wind speed of 1 towards the direction of 136. Temperature feels like 57.",
-          // "location": "Rua London Gordon, Centro, Guaporé - Rio Grande do Sul, Brazil",
-          // "address": "london"
-        }
-      });
-    }
-  );
+        // "forecast": "Today at Silva Paes, we have a temperature of 57, Partly cloudy, wind speed of 1 towards the direction of 136. Temperature feels like 57.",
+        // "location": "Rua London Gordon, Centro, Guaporé - Rio Grande do Sul, Brazil",
+        // "address": "london"
+      }
+    });
+  });
 });
